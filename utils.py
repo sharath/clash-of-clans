@@ -1,14 +1,12 @@
 import math
 
-def intersecting_area(circle1, circle2):
-    """
-    Return the area that two circles intersect
-    :param circle1: circle represented by (r, x, y)
-    :param circle2: circle represented by (r, x, y)
-    :return: area of intersection
-    """
-    R, r = circle1[0], circle2[0]
-    dist = distance(circle1[1], circle1[2], circle2[1], circle2[2])
+def eucl_dist(clan1, clan2):
+    return distance(clan1.x, clan1.y, clan2.x, clan2.y)
+
+
+def intersecting_area(clan1, clan2):
+    R, r = clan1.circle()[0], circle2.circle()[0]
+    dist = eucl_dist(clan1, clan2)
     if dist >= R + r: # no overlap
         return 0
     if dist < abs(R - r): # one circle inside the other
