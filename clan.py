@@ -17,26 +17,33 @@ class Clan:
         self.radius = np.sqrt(self.p/(np.pi*pop_density))
         self._history = defaultdict(lambda : [])
         self._world = world
+        self.dead = False
+        self.W = 0
         
     
     def step(self, dt=0.01):
         self.__monitor()
-        dp = (r(self.s)*self.p*(1.0 - (self.p/self.K)))*dt
+        if not self.dead:
+            dp = (r(self.s)*self.p*(1.0 - (self.p/self.K)))*dt - self.W
         
-        self.p += dp
-        self.delta = self.K - self.p
-        self.radius = np.sqrt(self.p/(np.pi*pop_density))
-        self.s = (self.s*self.p + 0.5*dp)/(self.p + dp)
+            self.p = np.max(self.p + dp, 0)
+            self.delta = self.K - self.p
+            self.radius = np.max(np.sqrt(self.p/(np.pi*pop_density)), 0)
+            self.s = (self.s*self.p + 0.5*dp)/(self.p + dp)
+            
+            self.W = np.sum([self.alpha_(w) for w in self.world])
+        if self.p <= 0:
+            self.dead = True
+            self.p = 0
     
     def __monitor(self):
         for k, v in vars(self).items():
             if '_' != k:
                 self._history[k].append(v)
-    
+
     @property
     def history(self):
         return self._history
-    
     
     @property
     def world(self):
@@ -45,9 +52,11 @@ class Clan:
     def lambda_(self, clan):
         return intersecting_area(self, clan)
     
+    def alpha_(self, clan):
+        return self.lambda_(clan) / np.log(np.abs(self.delta*clan.delta))
+    
 
 __world = []
-
 def generate_clan():
     c = Clan(np.random.uniform(0, d),
              np.random.uniform(0, d),

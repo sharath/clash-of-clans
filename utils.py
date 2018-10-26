@@ -8,6 +8,7 @@ def intersecting_area(clan1, clan2):
     R, r = clan1.radius, clan2.radius
     dist = eucl_dist(clan1, clan2)
     if dist >= R + r: # no overlap
+        # print(dist, R , r)
         return 0
     if dist < abs(R - r): # one circle inside the other
         return math.pi * min(R, r)**2
