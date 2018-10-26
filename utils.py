@@ -5,7 +5,7 @@ def eucl_dist(clan1, clan2):
 
 
 def intersecting_area(clan1, clan2):
-    R, r = clan1.r, clan2.r
+    R, r = clan1.radius, clan2.radius
     dist = eucl_dist(clan1, clan2)
     if dist >= R + r: # no overlap
         return 0
