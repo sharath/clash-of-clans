@@ -15,8 +15,8 @@ class Clan:
         self.K = total_k # carrying capacity of grid / goal for clan
         self.delta = self.K - self.p # discontent
         self.radius = np.sqrt(self.p/(np.pi*pop_density))
-        self.history = defaultdict(lambda : [])
-        self.world = world
+        self._history = defaultdict(lambda : [])
+        self._world = world
         
     
     def step(self, dt=0.01):
@@ -30,21 +30,31 @@ class Clan:
     
     def __monitor(self):
         for k, v in vars(self).items():
-            if k != 'history':
-                self.history[k].append(v)
+            if '_' != k:
+                self._history[k].append(v)
     
+    @property
+    def history(self):
+        return self._history
+    
+    
+    @property
+    def world(self):
+        return self._world
     
     def lambda_(self, clan):
         return intersecting_area(self, clan)
     
 
-world = []
+__world = []
 
 def generate_clan():
     c = Clan(np.random.uniform(0, d),
              np.random.uniform(0, d),
-             np.random.randint(min_start_pop, max_start_pop), world, s0=s_0)
-    for j in world:
+             np.random.randint(min_start_pop, max_start_pop), list(__world), s0=s_0)
+    
+    for j in __world:
         j.world.append(c)
+    __world.append(c)
     return c
 
