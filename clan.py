@@ -23,18 +23,21 @@ class Clan:
     
     def step(self, dt=0.01):
         self.__monitor()
-        if not self.dead:
-            dp = (r(self.s)*self.p*(1.0 - (self.p/self.K)))*dt - self.W
-        
-            self.p = np.max(self.p + dp, 0)
-            self.delta = self.K - self.p
-            self.radius = np.max(np.sqrt(self.p/(np.pi*pop_density)), 0)
-            self.s = (self.s*self.p + 0.5*dp)/(self.p + dp)
-            
-            self.W = np.sum([self.alpha_(w) for w in self.world])
         if self.p <= 0:
             self.dead = True
             self.p = 0
+            self.radius = 0
+            
+            
+        if not self.dead:
+            dp = (r(self.s)*self.p*(1.0 - (self.p/self.K)))*dt - self.W
+        
+            self.p = max(self._history['p'][-1] + dp, 0)
+            self.delta = self._history['K'][-1] - self._history['p'][-1]
+            self.radius = np.sqrt(self._history['p'][-1]/(np.pi*pop_density))
+            self.s = (self._history['s'][-1]*self._history['p'][-1] + 0.5*dp)/(self._history['p'][-1] + dp)
+            
+            self.W = np.sum([self.alpha_(w) for w in self.world])
     
     def __monitor(self):
         for k, v in vars(self).items():
@@ -50,6 +53,7 @@ class Clan:
         return self._world
     
     def lambda_(self, clan):
+        print(intersecting_area(self, clan))
         return intersecting_area(self, clan)
     
     def alpha_(self, clan):

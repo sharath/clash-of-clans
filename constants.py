@@ -6,5 +6,5 @@ max_start_pop = 10000
 min_start_pop = 500
 n = 2 # number of clans
 s_0 = 17.0/18.0 # initial % female
-pop_density = 1#np.random.randint(50, 200) # number of people supported by a square kilometer of land (look for source)
+pop_density = 10#np.random.randint(50, 200) # number of people supported by a square kilometer of land (look for source)
 total_k = d**2 * pop_density
