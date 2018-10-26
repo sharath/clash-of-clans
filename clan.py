@@ -29,21 +29,36 @@ class Clan:
     def step(self, dt=0.01):
         self.__monitor()
         
+        if self.m <= 0:
+            self.m = 0
+            dead = True
+        
         # values for the last time step
         s = self.last('s')
-        p = self.last('m')+self.last('f')
+        p = self.last('m') + self.last('f')
         K = self.last('K')
         W = self.last('W')
         
-        self.m += 0.5*r(s)*p*(1-(p/K)) - g*np.sum(W)
-        self.f += 0.5*r(s)*p*(1-(p/K)) - (1-g)*np.sum(W)
+        dm = (0.5*r(s)*p*(1-(p/K)) - g*np.sum(W))*dt
+        df = (0.5*r(s)*p*(1-(p/K)) - (1-g)*np.sum(W))*dt
+        
+        if self.dead:
+            df = -1*(1-g)*np.sum(W)*dt
+            dm = 0
+            
+        if self.f <= 0:
+            self.f = 0
+            self.df = 0
+
+        self.m += dm
+        self.f += df
         
         self.delta = K - p
         self.radius = np.sqrt(p/(np.pi*pop_density))
         
         self.W = np.sum([self.alpha_(w) for w in self.world])
         
-        self.s = min(max(self.f / self.p, 0), 1)
+        self.s = max(min(self.f / self.p, 1), 0)
     
     def __monitor(self):
         for k in self.__keys:
