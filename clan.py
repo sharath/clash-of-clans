@@ -16,14 +16,14 @@ class Clan:
         self.r = np.sqrt(self.p/(np.pi*pop_density))
         
     
-    def step(dt=0.01):
-        dpdt = (self.r(self.s)*self.p*(1.0 - (self.p/self.K)))
-        dsdt = (self.s*self.p + 0.5*dpdt)/(self.p + dpdt)
+    def step(self, dt=0.01):
+        dp = (self.r*(self.s)*self.p*(1.0 - (self.p/self.K)))*dt
         
-        self.p += dt*dpdt
-        self.s += dt*dsdt
+        self.p += dp
         self.delta = self.K - self.p
         self.r = np.sqrt(self.p/(np.pi*pop_density))
+        print(self.p)
+        self.s = (self.s*self.p + 0.5*dp)/(self.p + dp)
     
     
     def lambda_(self, clan):
