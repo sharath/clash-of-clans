@@ -28,11 +28,7 @@ class Clan:
     
     def step(self, dt=0.01):
         self.__monitor()
-        
-        if self.m <= 0:
-            self.m = 0
-            dead = True
-        
+
         # values for the last time step
         s = self.last('s')
         p = self.last('m') + self.last('f')
@@ -41,15 +37,23 @@ class Clan:
         
         dm = (0.5*r(s)*p*(1-(p/K)) - g*np.sum(W))*dt
         df = (0.5*r(s)*p*(1-(p/K)) - (1-g)*np.sum(W))*dt
-        
-        if self.dead:
-            df = -1*(1-g)*np.sum(W)*dt
+            
+        if self.m <= 0:
+            self.m = 0
             dm = 0
+            df = -1*(1-g)*np.sum(W)*dt
             
         if self.f <= 0:
             self.f = 0
-            self.df = 0
-
+            df = 0
+            
+        if self.f <= 0 and self.s <= 0:
+            self.dead = True
+            
+        if self.dead:
+            df = 0
+            dm = 0
+    
         self.m += dm
         self.f += df
         
@@ -58,7 +62,10 @@ class Clan:
         
         self.W = np.sum([self.alpha_(w) for w in self.world])
         
-        self.s = max(min(self.f / self.p, 1), 0)
+        if self.p > 1e-15:
+            self.s = self.f / self.p
+        else:
+            self.s = 0
     
     def __monitor(self):
         for k in self.__keys:
@@ -87,7 +94,11 @@ class Clan:
     
 
 __world = []
+__seed = 0
 def generate_clan():
+    global __seed
+    np.random.seed(__seed)
+    __seed += 1
     c = Clan(np.random.uniform(0, d),
              np.random.uniform(0, d),
              np.random.randint(min_start_pop, max_start_pop), list(__world), s0=s_0)
