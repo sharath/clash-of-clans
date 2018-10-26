@@ -31,12 +31,12 @@ class Clan:
             
             
         if not self.dead:
-            dp = (r(self.s)*self.p*(1.0 - (self.p/self.K)))*dt - self.W
+            dp = (r(self.s)*self.p*(1.0 - (self.p/self.K)) - self.W**3)*dt 
         
             self.p = max(self._history['p'][-1] + dp, 0)
             self.delta = self._history['K'][-1] - self._history['p'][-1]
             self.radius = np.sqrt(self._history['p'][-1]/(np.pi*pop_density))
-            self.s = (self._history['s'][-1]*self._history['p'][-1] + 0.5*dp)/(self._history['p'][-1] + dp)
+            self.s = max(min((self._history['s'][-1]*self._history['p'][-1] + 0.5*dp)/(self._history['p'][-1] + dp), 1), 0)
             
             self.W = np.sum([self.alpha_(w) for w in self.world])
     
