@@ -8,3 +8,5 @@ n = 2 # number of clans
 s_0 = 17.0/18.0 # initial % female
 pop_density = np.random.randint(50, 200) # number of people supported by a square kilometer of land (look for source)
 total_k = d**2 * pop_density
+hostility = 3
+g = 0.5
