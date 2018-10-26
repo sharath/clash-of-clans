@@ -57,7 +57,7 @@ class Clan:
         return intersecting_area(self, clan)
     
     def alpha_(self, clan):
-        return self.lambda_(clan) / np.log(self.delta*clan.delta)
+        return (self.lambda_(clan)*(self.delta))/(clan.delta)
     
 
 __world = []
