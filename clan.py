@@ -27,6 +27,7 @@ class Clan:
             self.dead = True
             self.p = 0
             self.radius = 0
+            self.s = 0
             
             
         if not self.dead:
@@ -53,11 +54,10 @@ class Clan:
         return self._world
     
     def lambda_(self, clan):
-        print(intersecting_area(self, clan))
         return intersecting_area(self, clan)
     
     def alpha_(self, clan):
-        return self.lambda_(clan) / np.log(np.abs(self.delta*clan.delta))
+        return self.lambda_(clan) / np.log(self.delta*clan.delta)
     
 
 __world = []
