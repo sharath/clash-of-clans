@@ -23,6 +23,11 @@ class Clan:
         self.dead = False
         self.W = 0
         
+        self.color = (np.random.uniform(0.1, 1),
+                      np.random.uniform(0.1, 1),
+                      np.random.uniform(0.1, 1),
+                      0.7)
+        
         self.__keys = ['x', 'y', 'radius', 'm', 'f', 'dead', 'W', 's', 'K']
         
     
@@ -55,7 +60,7 @@ class Clan:
         
         dm = (0.5*r(s)*p*(1-(p/K)) - g*np.sum(W))*dt
         df = (0.5*r(s)*p*(1-(p/K)) - (1-g)*np.sum(W))*dt
-            
+        
         self.m += dm
         self.f += df
         
@@ -90,7 +95,7 @@ class Clan:
         return intersecting_area(self, clan)
     
     def alpha_(self, clan):
-        return (self.lambda_(clan)/np.log(clan.delta * self.delta))**(hostility)
+        return (self.lambda_(clan)/np.log(clan.delta * self.delta))**hostility
     
 
 __world = []

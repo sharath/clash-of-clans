@@ -2,12 +2,12 @@ import numpy as np
 np.random.seed(1)
 
 d = 100 # size of square in km
-s_0 = 0.5 # initial % female
-pop_density = 1 # number of people supported by a square kilometer of land (look for source)
+s_0 = 0.5 # initial % female (given by problem)
+pop_density = 7 # number of people supported by a square kilometer of land (look for source)
 total_k = d**2 * pop_density
-max_start_pop = 250
+max_start_pop = 100
 min_start_pop = 50
-hostility = 10
+hostility = 3.4
 
-natural_death = 0.1
-g = 0.9
+natural_death = 0.7
+g = 0.58
