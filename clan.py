@@ -27,9 +27,27 @@ class Clan:
         
     
     def step(self, dt=0.01):
+        if self.m <= 0.9:
+            self.dead = True
+            self.m=0
+        if self.dead and self.last('f') >= 1:
+            df = (-1*natural_death*self.last('f'))*dt
+            self.W = np.sum([self.alpha_(w) for w in self.world])
+            self.f += df
+            self.radius = np.sqrt(self.last('f')/(np.pi*pop_density))
+            self.s = self.last('f') / self.last('f')
+            self.delta = self.last('K') - self.last('f')
+            self.__monitor()
+            return
+        elif self.dead:
+            self.radius = 0
+            self.f = 0
+            self.s = None
+            self.__monitor()
+            return
+        
         self.__monitor()
-
-        # values for the last time step
+        
         s = self.last('s')
         p = self.last('m') + self.last('f')
         K = self.last('K')
@@ -38,22 +56,6 @@ class Clan:
         dm = (0.5*r(s)*p*(1-(p/K)) - g*np.sum(W))*dt
         df = (0.5*r(s)*p*(1-(p/K)) - (1-g)*np.sum(W))*dt
             
-        if self.m <= 0:
-            self.m = 0
-            dm = 0
-            df = -1*(1-g)*np.sum(W)*dt
-            
-        if self.f <= 0:
-            self.f = 0
-            df = 0
-            
-        if self.f <= 0 and self.s <= 0:
-            self.dead = True
-            
-        if self.dead:
-            df = 0
-            dm = 0
-    
         self.m += dm
         self.f += df
         
@@ -62,10 +64,8 @@ class Clan:
         
         self.W = np.sum([self.alpha_(w) for w in self.world])
         
-        if self.p > 1e-15:
-            self.s = self.f / self.p
-        else:
-            self.s = 0
+        self.s = self.last('f')/ p
+        
     
     def __monitor(self):
         for k in self.__keys:
@@ -90,18 +90,20 @@ class Clan:
         return intersecting_area(self, clan)
     
     def alpha_(self, clan):
-        return (self.lambda_(clan)/np.log(clan.delta * self.delta))**hostility
+        return (self.lambda_(clan)/np.log(clan.delta * self.delta))**(hostility)
     
 
 __world = []
-__seed = 0
+__seed = 23
 def generate_clan():
     global __seed
     np.random.seed(__seed)
     __seed += 1
     c = Clan(np.random.uniform(0, d),
              np.random.uniform(0, d),
-             np.random.randint(min_start_pop, max_start_pop), list(__world), s0=s_0)
+             np.random.randint(min_start_pop, max_start_pop),
+             list(__world), 
+             s0=s_0)
     
     for j in __world:
         j.world.append(c)

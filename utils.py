@@ -20,3 +20,8 @@ def intersecting_area(clan1, clan2):
 
 def distance(x1, y1, x2, y2):
     return ((x1 - x2) ** 2 + (y2 - y1) ** 2) ** 0.5
+
+
+def euclidean_distance(clan1, clan2):
+    x1, y1, x2, y2 = clan1.x, clan1.y, clan2.x, clan2.y
+    return ((x1 - x2) ** 2 + (y2 - y1) ** 2) ** 0.5
