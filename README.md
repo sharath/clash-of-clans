@@ -28,6 +28,7 @@ discussion on how to extend the model to more than two groups is expected.
 [1] Collins, Nathan. 2018. Wars and clan structure may explain a strange biological event 7,000 years ago,
 Stanford researchers find. Stanford University News Service. 30 May. https://news.stanford.edu/pressreleases/2018/05/30/war-clan-structubiological-event/.
 Accessed 3 September 2018.
+
 [2] Zeng, Tian Chen, Alan J. Aw, and Marcus W. Feldman. 2018. Cultural hitchhiking and competition
 between patrilineal kin groups explain the post-Neolithic Y-chromosome bottleneck. Nature
 Communications. Volume 9, Article number: 2077. https://www.nature.com/articles/s41467-018-04375-6.

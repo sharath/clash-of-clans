@@ -7,7 +7,7 @@ r = lambda s : -1 * s**3 * np.log(s) # rate of growth
 
 
 class Clan:
-    def __init__(self, x, y, p0, world, s0):
+    def __init__(self, x, y, p0, world, s0, index):
         self.x = x
         self.y = y
         self.s = s0
@@ -71,7 +71,12 @@ class Clan:
         
         self.s = self.last('f')/ p
         
-    
+        # dx = np.sqrt(self.delta) * np.random.randint(-1, 2) / d
+        # dy = np.sqrt(self.delta) * np.random.randint(-1, 2) / d
+        # self.x = max(min(self.last('x') + dx, d), 0)
+        # self.y = max(min(self.last('y') + dy, d), 0)
+        
+        
     def __monitor(self):
         for k in self.__keys:
             self._history[k].append(vars(self)[k])
@@ -108,7 +113,8 @@ def generate_clan():
              np.random.uniform(0, d),
              np.random.randint(min_start_pop, max_start_pop),
              list(__world), 
-             s0=s_0)
+             s0=s_0,
+            )
     
     for j in __world:
         j.world.append(c)

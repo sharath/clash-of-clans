@@ -1,9 +1,0 @@
-Assumptions:
-Clans only start in a specified fixed land area, may grow outside of it
-Earth flat
-Resources are evenly distributed among land and all land is equally viable for farming
-During conflict, only males die
-Births equal chance of male and female
-(lambda shared boundary: humans very territorial)
-Clans grow in circular shapes
-Given hypothethis
