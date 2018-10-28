@@ -2,8 +2,6 @@
 
 # Conflict Between Patrilineal Clans
 
-![simulation](https://github.com/sharath/SCUDEM-F18/blob/master/simulation.gif)
-
 ## Question
 Roughly 7,000 years ago the genetic record for humans indicates that there was a dramatic decrease in the
 variation in Y chromosomes [2]. It appears that the number of people carrying the Y chromosome decreased
@@ -39,4 +37,4 @@ Communications. Volume 9, Article number: 2077. https://www.nature.com/articles/
 Accessed 3 September 2018. Freely downloadable. This article is licensed under a Creative Commons
 Attribution 4.0 International License.
 
-#### Received Outstanding Award for Presentation and Paper at the SCUDEM III 2018 University of Massachusetts Amherst Host Site
+#### Received Outstanding Presentation and Paper Award at the SCUDEM III 2018 University of Massachusetts Amherst Host Site
