@@ -37,4 +37,9 @@ Communications. Volume 9, Article number: 2077. https://www.nature.com/articles/
 Accessed 3 September 2018. Freely downloadable. This article is licensed under a Creative Commons
 Attribution 4.0 International License.
 
+## Team Members
+- [Ji Hun Hwang](https://github.com/jihunhwang)
+- [Samuel Rosen](https://github.com/SamGRosen)
+- [Sharath Ramkumar](http://github.com/sharath)
+
 #### Received Outstanding Presentation and Paper Award at the SCUDEM III 2018 University of Massachusetts Amherst Host Site
