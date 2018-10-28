@@ -1,3 +1,5 @@
+![simulation](https://github.com/sharath/SCUDEM-F18/blob/master/animations/animation_static.gif)
+
 # Conflict Between Patrilineal Clans
 
 ## Question
@@ -35,3 +37,4 @@ Communications. Volume 9, Article number: 2077. https://www.nature.com/articles/
 Accessed 3 September 2018. Freely downloadable. This article is licensed under a Creative Commons
 Attribution 4.0 International License.
 
+#### Received Outstanding Award for Presentation and Paper at the SCUDEM III 2018 University of Massachusetts Amherst Host Site

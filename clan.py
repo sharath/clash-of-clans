@@ -7,7 +7,7 @@ r = lambda s : -1 * s**3 * np.log(s) # rate of growth
 
 
 class Clan:
-    def __init__(self, x, y, p0, world, s0, index):
+    def __init__(self, x, y, p0, world, s0):
         self.x = x
         self.y = y
         self.s = s0
